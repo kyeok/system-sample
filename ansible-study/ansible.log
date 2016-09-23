@@ -77,3 +77,16 @@ IOError: [Errno 13] Permission denied: '/home/deploy/study/ansible/harley/samepl
 2016-09-23 18:09:54,012 p=12606 u=Harley |  changed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'sample2'})
 2016-09-23 18:09:54,013 p=12606 u=Harley |  PLAY RECAP ******************************************************************** 
 2016-09-23 18:09:54,013 p=12606 u=Harley |  gift-ansible-test.krane.iwilab.com : ok=3    changed=1    unreachable=0    failed=0   
+2016-09-23 18:13:29,888 p=13299 u=Harley |   
+2016-09-23 18:13:29,888 p=13299 u=Harley |  /usr/local/Cellar/ansible/1.8.4/libexec/bin/ansible-playbook file.yml -i hosts/test
+2016-09-23 18:13:29,888 p=13299 u=Harley |   
+2016-09-23 18:13:29,905 p=13299 u=Harley |  PLAY [터치 파일 테스트] ************************************************************** 
+2016-09-23 18:13:29,906 p=13299 u=Harley |  GATHERING FACTS *************************************************************** 
+2016-09-23 18:13:32,386 p=13299 u=Harley |  ok: [gift-ansible-test.krane.iwilab.com]
+2016-09-23 18:13:32,386 p=13299 u=Harley |  TASK: [touch_file | 디렉토리 생성] ************************************** 
+2016-09-23 18:13:32,669 p=13299 u=Harley |  ok: [gift-ansible-test.krane.iwilab.com]
+2016-09-23 18:13:32,670 p=13299 u=Harley |  TASK: [touch_file | 파일생성] ********************************************* 
+2016-09-23 18:13:32,952 p=13299 u=Harley |  changed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'sample1'})
+2016-09-23 18:13:33,235 p=13299 u=Harley |  changed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'sample2'})
+2016-09-23 18:13:33,236 p=13299 u=Harley |  PLAY RECAP ******************************************************************** 
+2016-09-23 18:13:33,236 p=13299 u=Harley |  gift-ansible-test.krane.iwilab.com : ok=3    changed=1    unreachable=0    failed=0   
