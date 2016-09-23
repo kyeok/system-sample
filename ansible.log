@@ -1,0 +1,79 @@
+2016-09-23 18:03:54,530 p=11448 u=Harley |   
+2016-09-23 18:03:54,531 p=11448 u=Harley |  /usr/local/Cellar/ansible/1.8.4/libexec/bin/ansible-playbook file.yml -i hosts/test
+2016-09-23 18:03:54,531 p=11448 u=Harley |   
+2016-09-23 18:03:54,537 p=11448 u=Harley |  ERROR: cannot find role in /Users/Harley/dev/workspace/system-sample/roles/touch_file or /Users/Harley/dev/workspace/system-sample/touch_file or /Users/Harley/dev/workspace/system-sample/roles/touch_file
+2016-09-23 18:06:19,466 p=11998 u=Harley |   
+2016-09-23 18:06:19,466 p=11998 u=Harley |  /usr/local/Cellar/ansible/1.8.4/libexec/bin/ansible-playbook file.yml -i hosts/test
+2016-09-23 18:06:19,466 p=11998 u=Harley |   
+2016-09-23 18:06:19,472 p=11998 u=Harley |  ERROR: Syntax Error while loading YAML script, /Users/Harley/dev/workspace/system-sample/roles/touch_file/tasks/main.yml
+Note: The error may actually appear before this position: line 11, column 9
+
+  with_items :
+  - {src:'samepl1'}
+        ^
+This one looks easy to fix.  It seems that there is a value started
+with a quote, and the YAML parser is expecting to see the line ended
+with the same kind of quote.  For instance:
+
+    when: "ok" in result.stdout
+
+Could be written as:
+
+   when: '"ok" in result.stdout'
+
+or equivalently:
+
+   when: "'ok' in result.stdout"
+
+
+2016-09-23 18:08:32,426 p=12259 u=Harley |   
+2016-09-23 18:08:32,426 p=12259 u=Harley |  /usr/local/Cellar/ansible/1.8.4/libexec/bin/ansible-playbook file.yml -i hosts/test
+2016-09-23 18:08:32,426 p=12259 u=Harley |   
+2016-09-23 18:08:32,481 p=12259 u=Harley |  PLAY [터치 파일 테스트] ************************************************************** 
+2016-09-23 18:08:32,482 p=12259 u=Harley |  GATHERING FACTS *************************************************************** 
+2016-09-23 18:08:34,566 p=12259 u=Harley |  ok: [gift-ansible-test.krane.iwilab.com]
+2016-09-23 18:08:34,567 p=12259 u=Harley |  TASK: [touch_file | 디렉토리 생성] ************************************** 
+2016-09-23 18:08:34,860 p=12259 u=Harley |  ok: [gift-ansible-test.krane.iwilab.com]
+2016-09-23 18:08:34,861 p=12259 u=Harley |  TASK: [touch_file | 파일생성] ********************************************* 
+2016-09-23 18:08:35,160 p=12259 u=Harley |  failed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'samepl1'}) => {"failed": true, "item": {"src": "samepl1"}, "parsed": false}
+2016-09-23 18:08:35,160 p=12259 u=Harley |  Traceback (most recent call last):
+  File "/home/deploy/.ansible/tmp/ansible-tmp-1474621714.88-7530833193595/file", line 1993, in <module>
+    main()
+  File "/home/deploy/.ansible/tmp/ansible-tmp-1474621714.88-7530833193595/file", line 371, in main
+    open(path, 'w').close()
+IOError: [Errno 13] Permission denied: '/home/deploy/study/ansible/harley/samepl1.txt'
+
+2016-09-23 18:08:35,452 p=12259 u=Harley |  failed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'samepl2'}) => {"failed": true, "item": {"src": "samepl2"}, "parsed": false}
+2016-09-23 18:08:35,453 p=12259 u=Harley |  Traceback (most recent call last):
+  File "/home/deploy/.ansible/tmp/ansible-tmp-1474621715.16-151134668336578/file", line 1993, in <module>
+    main()
+  File "/home/deploy/.ansible/tmp/ansible-tmp-1474621715.16-151134668336578/file", line 371, in main
+    open(path, 'w').close()
+IOError: [Errno 13] Permission denied: '/home/deploy/study/ansible/harley/samepl2.txt'
+
+2016-09-23 18:08:35,741 p=12259 u=Harley |  failed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'samepl3'}) => {"failed": true, "item": {"src": "samepl3"}, "parsed": false}
+2016-09-23 18:08:35,742 p=12259 u=Harley |  Traceback (most recent call last):
+  File "/home/deploy/.ansible/tmp/ansible-tmp-1474621715.46-193647416456204/file", line 1993, in <module>
+    main()
+  File "/home/deploy/.ansible/tmp/ansible-tmp-1474621715.46-193647416456204/file", line 371, in main
+    open(path, 'w').close()
+IOError: [Errno 13] Permission denied: '/home/deploy/study/ansible/harley/samepl3.txt'
+
+2016-09-23 18:08:35,742 p=12259 u=Harley |  FATAL: all hosts have already failed -- aborting
+2016-09-23 18:08:35,742 p=12259 u=Harley |  PLAY RECAP ******************************************************************** 
+2016-09-23 18:08:35,743 p=12259 u=Harley |             to retry, use: --limit @/Users/Harley/file.retry
+
+2016-09-23 18:08:35,743 p=12259 u=Harley |  gift-ansible-test.krane.iwilab.com : ok=2    changed=0    unreachable=0    failed=1   
+2016-09-23 18:09:50,946 p=12606 u=Harley |   
+2016-09-23 18:09:50,946 p=12606 u=Harley |  /usr/local/Cellar/ansible/1.8.4/libexec/bin/ansible-playbook file.yml -i hosts/test
+2016-09-23 18:09:50,946 p=12606 u=Harley |   
+2016-09-23 18:09:50,963 p=12606 u=Harley |  PLAY [터치 파일 테스트] ************************************************************** 
+2016-09-23 18:09:50,963 p=12606 u=Harley |  GATHERING FACTS *************************************************************** 
+2016-09-23 18:09:53,158 p=12606 u=Harley |  ok: [gift-ansible-test.krane.iwilab.com]
+2016-09-23 18:09:53,159 p=12606 u=Harley |  TASK: [touch_file | 디렉토리 생성] ************************************** 
+2016-09-23 18:09:53,453 p=12606 u=Harley |  ok: [gift-ansible-test.krane.iwilab.com]
+2016-09-23 18:09:53,454 p=12606 u=Harley |  TASK: [touch_file | 파일생성] ********************************************* 
+2016-09-23 18:09:53,736 p=12606 u=Harley |  changed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'sample1'})
+2016-09-23 18:09:54,012 p=12606 u=Harley |  changed: [gift-ansible-test.krane.iwilab.com] => (item={'src': 'sample2'})
+2016-09-23 18:09:54,013 p=12606 u=Harley |  PLAY RECAP ******************************************************************** 
+2016-09-23 18:09:54,013 p=12606 u=Harley |  gift-ansible-test.krane.iwilab.com : ok=3    changed=1    unreachable=0    failed=0   

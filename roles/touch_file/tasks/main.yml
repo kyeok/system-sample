@@ -1,0 +1,13 @@
+---
+- name : 디렉토리 생성
+  sudo : true
+  file : path=/home/deploy/study/ansible/harley
+         state=directory
+
+- name : 파일생성
+  sudo : true
+  file : path=/home/deploy/study/ansible/harley/{{item.src}}.txt 
+         state=touch
+  with_items :
+  - { src: 'sample1' }
+  - { src: 'sample2' }

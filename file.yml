@@ -1,0 +1,5 @@
+---
+- name : 터치 파일 테스트
+  hosts : all
+  roles :
+  - touch_file
