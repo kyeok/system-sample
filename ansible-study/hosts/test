@@ -1,2 +1,1 @@
-#test.example.com project-ansible phase=alpha
-gift-ansible-test.krane.iwilab.com  project=ansible phase=alpha
+test.example.com project-ansible phase=alpha
